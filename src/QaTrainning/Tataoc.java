@@ -1,8 +1,14 @@
 package QaTrainning;
 
+import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+
+import net.bytebuddy.jar.asm.Handle;
 
 
 public class Tataoc {
@@ -18,7 +24,6 @@ public class Tataoc {
 
 
 		driver.findElement(By.className("greenbox")).click();
-
 
 		driver.switchTo().frame(driver.findElement(By.id("main")));
 
@@ -44,8 +49,32 @@ public class Tataoc {
 		while(!(Box1.equals(Box2)));
 		
 		
+		//driver.switchTo().frame(driver.findElement(By.id("dropbox")));
+		WebElement From = driver.findElement(By.id("dragbox"));
+		WebElement To =driver.findElement(By.id("dropbox"));
+		
+		 Actions act=new Actions(driver);					
+
+				
+		         act.dragAndDrop(From, To).build().perform();
+		         driver.findElement(By.linkText("Proceed")).click();
+		         
+		         
+		         driver.findElement(By.linkText("Launch Popup Window")).click();
+		         for(String windowHandle  : driver.getWindowHandles()) {
+		         driver.switchTo().window(windowHandle);
+		         }
+		   
+		         driver.findElement(By.id("name")).sendKeys("aditi");
+		         driver.findElement(By.id("submit")).click();
+			}		
+		
+		
+		
+		
+		
 		
 		
 
 	}
-}
+
