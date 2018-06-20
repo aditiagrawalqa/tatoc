@@ -2,6 +2,7 @@ package QaTrainning;
 
 import java.util.Set;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -61,12 +62,32 @@ public class Tataoc {
 		         
 		         
 		         driver.findElement(By.linkText("Launch Popup Window")).click();
+		         String winHandleBefore = driver.getWindowHandle();
 		         for(String windowHandle  : driver.getWindowHandles()) {
 		         driver.switchTo().window(windowHandle);
 		         }
 		   
 		         driver.findElement(By.id("name")).sendKeys("aditi");
 		         driver.findElement(By.id("submit")).click();
+		        // String MainWindow=driver.getWindowHandle();
+		         // String winHandleAfter = driver.getWindowHandle();
+		        
+
+		         
+		         driver.switchTo().window(winHandleBefore);
+		         driver.findElement(By.linkText("Proceed")).click();
+		         driver.findElement(By.linkText("Generate Token")).click();
+		         String token= driver.findElement(By.id("token")).getText();
+		         String [] s= token.split(" ");
+		         
+		         
+		         
+		         Cookie name = new Cookie("Token:",s[2]);
+		 		driver.manage().addCookie(name);
+		 		 
+			
+		  
+		        driver.findElement(By.linkText("Proceed")).click();
 			}		
 		
 		
